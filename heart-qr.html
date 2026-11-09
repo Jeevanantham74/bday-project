@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heart QR Code Card ❤️ | For Leena</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond, Outfit, Dancing Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=Dancing+Script:wght@700&family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- QRCode.js library CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- html2canvas for 1-click PNG download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 30%, #2b0b1e 0%, #150510 60%, #080206 100%);
+      color: #fce7f3;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* Heart Cutout Frame */
+    .heart-shape-container {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      box-shadow: 0 0 35px rgba(225, 29, 72, 0.45);
+      border-radius: 2rem;
+      border: 4px solid #f43f5e;
+      overflow: hidden;
+    }
+
+    .heart-svg-clip {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border: 6px solid #e11d48;
+      border-radius: 1.75rem;
+    }
+
+    /* Luxury Gold & Velvet Card */
+    .gift-card {
+      background: linear-gradient(145deg, rgba(38, 12, 30, 0.95), rgba(20, 6, 16, 0.98));
+      border: 2px solid rgba(244, 63, 94, 0.4);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(225, 29, 72, 0.2);
+      border-radius: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="max-w-md w-full space-y-6">
+
+    <!-- Header & Link Customizer -->
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1 bg-rose-950/80 border border-rose-500/40 rounded-full text-xs font-bold text-rose-300 uppercase tracking-wider">
+        <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400 fill-rose-500"></i>
+        <span>Scan To Unlock Our Love Story</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-['Outfit']">
+        Heart QR Code Card
+      </h1>
+      <p class="text-xs text-rose-200/70">
+        You can send this QR card to Leena or print it as a physical gift!
+      </p>
+    </div>
+
+    <!-- URL Input Control for when Vercel is deployed -->
+    <div class="p-3.5 bg-black/40 border border-rose-500/30 rounded-2xl space-y-2 text-xs">
+      <label class="font-bold text-rose-200 flex items-center justify-between">
+        <span>Website Live Link (URL):</span>
+        <span class="text-[10px] text-amber-300">Editable</span>
+      </label>
+      <div class="flex gap-2">
+        <input 
+          type="text" 
+          id="qrUrlInput" 
+          value="https://mygirl-bday.netlify.app" 
+          placeholder="Paste your final URL here..." 
+          class="flex-1 px-3 py-2 bg-black/60 border border-rose-500/40 rounded-xl text-white text-xs focus:outline-none focus:border-rose-400"
+        />
+        <button 
+          onclick="updateQRCode()" 
+          class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs transition"
+        >
+          Update QR
+        </button>
+      </div>
+    </div>
+
+    <!-- The Printable Gift Card with Heart Frame QR -->
+    <div id="captureCard" class="gift-card p-6 sm:p-8 text-center space-y-5 relative">
+      
+      <!-- Card Top Badge -->
+      <div class="space-y-1">
+        <p class="text-[11px] text-amber-300 font-bold uppercase tracking-widest font-['Outfit']">
+          A Private Gift For Leena ❤️
+        </p>
+        <h2 class="text-xl sm:text-2xl font-black text-white font-['Outfit']">
+          Scan With Your Phone Camera
+        </h2>
+        <p class="text-xs text-rose-200/80 font-serif italic">
+          "A world crafted only for you, waiting to be unlocked."
+        </p>
+      </div>
+
+      <!-- Center Heart Frame QR Box -->
+      <div class="flex justify-center py-2">
+        <div class="heart-shape-container relative p-3">
+          <!-- QR Code Canvas Container -->
+          <div id="qrcode" class="flex items-center justify-center"></div>
+
+          <!-- Center Love Badge in middle of QR -->
+          <div class="absolute w-12 h-12 rounded-full bg-rose-600 border-2 border-white flex items-center justify-center shadow-lg pointer-events-none">
+            <i data-lucide="heart" class="w-6 h-6 text-white fill-white"></i>
+          </div>
+
+          <div class="heart-svg-clip"></div>
+        </div>
+      </div>
+
+      <!-- Secret Code Hint & Footnote -->
+      <div class="space-y-2 pt-2 border-t border-rose-500/20">
+        <div class="inline-block px-3 py-1 bg-rose-950/90 border border-rose-400/40 rounded-full text-[11px] text-rose-200 font-semibold">
+          🤫 Secret Passcode: <span class="font-extrabold text-white tracking-widest">0710</span>
+        </div>
+        <p class="text-xs font-['Dancing_Script'] text-rose-300 text-lg">
+          Forever Yours, Jeevanantham ❤️
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Print / Download / Action Buttons -->
+    <div class="flex flex-wrap gap-3 justify-center">
+      <button 
+        onclick="downloadQRCard()" 
+        class="px-5 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-rose-600/40 transition flex items-center space-x-2"
+      >
+        <i data-lucide="download" class="w-4 h-4"></i>
+        <span>Download Card (PNG)</span>
+      </button>
+
+      <button 
+        onclick="window.print()" 
+        class="px-5 py-3 bg-rose-950/70 hover:bg-rose-900 border border-rose-500/40 text-rose-200 font-bold rounded-xl text-xs uppercase tracking-wider transition flex items-center space-x-2"
+      >
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>Print Card</span>
+      </button>
+
+      <a 
+        href="index.html" 
+        class="px-5 py-3 bg-rose-950/70 hover:bg-rose-900 border border-rose-500/40 text-rose-200 font-bold rounded-xl text-xs uppercase tracking-wider transition flex items-center space-x-1.5"
+      >
+        <span>Open Website</span>
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    let qrcodeObj = null;
+
+    function renderQR(url) {
+      const container = document.getElementById("qrcode");
+      container.innerHTML = "";
+      qrcodeObj = new QRCode(container, {
+        text: url,
+        width: 220,
+        height: 220,
+        colorDark: "#1a0513",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H // High error correction so center heart icon doesn't break scanning!
+      });
+    }
+
+    function updateQRCode() {
+      const input = document.getElementById("qrUrlInput");
+      const url = (input.value || "").trim();
+      if (url) {
+        renderQR(url);
+      }
+    }
+
+    function downloadQRCard() {
+      const card = document.getElementById("captureCard");
+      if (!card || typeof html2canvas !== 'function') return;
+      html2canvas(card, { scale: 2, backgroundColor: null }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "Leena_Love_QR_Card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      renderQR(document.getElementById("qrUrlInput").value);
+    });
+  </script>
+</body>
+</html>

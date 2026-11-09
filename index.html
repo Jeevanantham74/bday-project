@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Our Forever Story ❤️ | Special Surprise</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cormorant Garamond, Outfit, Dancing Script, Caveat, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Dancing+Script:wght@700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration for Luxury Romantic Theme -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['"Outfit"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            script: ['"Dancing Script"', 'cursive'],
+            polaroid: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            romantic: {
+              bg: '#140810',
+              bgLight: '#210d1b',
+              card: '#2a1122',
+              cardGlass: 'rgba(42, 17, 34, 0.75)',
+              border: '#541c39',
+              rose: '#e11d48',
+              roseLight: '#fb7185',
+              crimson: '#be123c',
+              gold: '#fbbf24',
+              goldLight: '#fde68a',
+              text: '#fce7f3',
+              textMuted: '#f472b6',
+            }
+          },
+          animation: {
+            'float': 'gentleFloat 4s ease-in-out infinite',
+            'float-slow': 'gentleFloat 6s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+            'heartbeat': 'heartbeat 1.4s ease-in-out infinite',
+            'shake': 'screenTremor 0.6s cubic-bezier(.36,.07,.19,.97) both',
+          },
+          keyframes: {
+            gentleFloat: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-10px) rotate(1deg)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.8', transform: 'scale(1)', filter: 'drop-shadow(0 0 15px rgba(225,29,72,0.4))' },
+              '50%': { opacity: '1', transform: 'scale(1.03)', filter: 'drop-shadow(0 0 30px rgba(225,29,72,0.8))' },
+            },
+            heartbeat: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '14%': { transform: 'scale(1.2)' },
+              '28%': { transform: 'scale(1)' },
+              '42%': { transform: 'scale(1.25)' },
+              '70%': { transform: 'scale(1)' },
+            },
+            screenTremor: {
+              '10%, 90%': { transform: 'translate3d(-2px, -1px, 0)' },
+              '20%, 80%': { transform: 'translate3d(3px, 2px, 0)' },
+              '30%, 50%, 70%': { transform: 'translate3d(-4px, -3px, 0)' },
+              '40%, 60%': { transform: 'translate3d(4px, 3px, 0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 20%, #2b0b1e 0%, #160611 50%, #0a0208 100%);
+      color: #fce7f3;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100dvh;
+    }
+
+    /* Falling Rose Petals Canvas */
+    #petalsCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    /* Balloon Overlay Layer for celebration */
+    #balloonContainer {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 50px;
+      height: 65px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      animation: flyUp linear forwards;
+    }
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 23px;
+      width: 2px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    @keyframes flyUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-130vh) rotate(20deg); opacity: 0; }
+    }
+
+    /* Romantic Glass Card */
+    .romantic-glass {
+      background: rgba(35, 12, 27, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(244, 114, 182, 0.25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(225, 29, 72, 0.15);
+      border-radius: 1.75rem;
+    }
+
+    /* Polaroid 3D Cards */
+    .polaroid-card {
+      background: #fffafa;
+      color: #2b0b1e;
+      padding: 12px 12px 24px 12px;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    .polaroid-card:hover {
+      transform: translateY(-8px) scale(1.02) rotate(0deg) !important;
+      box-shadow: 0 25px 45px rgba(225, 29, 72, 0.35);
+    }
+
+    /* Washi Tape Effect */
+    .washi-tape {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1.5deg);
+      width: 75px;
+      height: 22px;
+      background: rgba(254, 215, 226, 0.85);
+      border: 1px dashed rgba(244, 63, 94, 0.4);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 20;
+    }
+
+    /* 3D Flip Card Container */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Wax Seal Button */
+    .wax-seal {
+      background: radial-gradient(circle, #e11d48 30%, #9f1239 100%);
+      border: 3px solid #fda4af;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 6px 15px rgba(0,0,0,0.4);
+    }
+
+    /* Candle Flame Animation */
+    .flame {
+      background: radial-gradient(ellipse at 50% 80%, #ffffff 0%, #fef08a 30%, #f97316 70%, transparent 100%);
+      border-radius: 50% 50% 20% 20%;
+      animation: flicker 0.1s infinite alternate;
+      box-shadow: 0 0 15px #f59e0b, 0 0 30px #ef4444;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-1deg); }
+      100% { transform: scale(1.1) rotate(1deg); }
+    }
+
+    /* Screen Tremor / Shake Class */
+    .shake-active {
+      animation: screenTremor 0.8s cubic-bezier(.36,.07,.19,.97) both;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col justify-between items-center relative select-none">
+
+  <!-- Falling Rose Petals Canvas -->
+  <canvas id="petalsCanvas"></canvas>
+
+  <!-- Floating Balloons Container (for entry blast) -->
+  <div id="balloonContainer"></div>
+
+  <!-- Background Music Audio Element ("Uyire Un Uyirena") -->
+  <audio id="romanticAudio" preload="auto" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    <source src="song.wav" type="audio/wav">
+  </audio>
+
+  <!-- ========================================== -->
+  <!-- 1. GATEKEEPER LOCK SCREEN (STRICT ACCESS)  -->
+  <!-- ========================================== -->
+  <div id="gatekeeperScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl transition-all duration-700">
+    <div class="romantic-glass max-w-md w-full p-8 text-center space-y-6 relative overflow-hidden border border-rose-500/40">
+      
+      <!-- Glowing Background Orb -->
+      <div class="absolute -top-16 -left-16 w-44 h-44 bg-rose-600/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-44 h-44 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Love Lock Icon -->
+      <div class="relative mx-auto w-20 h-20 rounded-full bg-rose-950/80 border-2 border-rose-400/50 flex items-center justify-center shadow-lg shadow-rose-900/50">
+        <i data-lucide="heart" class="w-10 h-10 text-rose-500 animate-heartbeat fill-rose-500"></i>
+      </div>
+
+      <!-- Step 1: Email Form -->
+      <div id="authStepEmail" class="space-y-4">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-semibold rounded-full tracking-widest uppercase">
+            Strictly Private • Love Lock 🔐
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white font-heading tracking-tight">
+            Our Private World
+          </h1>
+          <p class="text-xs sm:text-sm text-rose-200/80">
+            Enter your email to unlock this universe made just for you.
+          </p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <div class="relative">
+            <i data-lucide="mail" class="absolute left-3.5 top-3.5 w-5 h-5 text-rose-400"></i>
+            <input 
+              type="email" 
+              id="inputEmail" 
+              placeholder="Enter your email address..."
+              class="w-full pl-11 pr-4 py-3 bg-black/50 border border-rose-500/40 rounded-xl text-white placeholder-rose-300/40 focus:outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-500/30 text-sm font-medium transition"
+              autocomplete="email"
+            />
+          </div>
+
+          <div id="emailErrorMsg" class="hidden text-xs text-rose-400 font-semibold p-2 bg-rose-950/60 border border-rose-500/30 rounded-lg"></div>
+
+          <button 
+            onclick="validateEmailStep()" 
+            class="w-full py-3.5 bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold rounded-xl shadow-lg shadow-rose-600/40 hover:shadow-rose-500/60 transition-all transform active:scale-95 flex items-center justify-center space-x-2"
+          >
+            <span>Proceed to Passcode</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Secret Code Form (PIN: 0710) -->
+      <div id="authStepCode" class="hidden space-y-4">
+        <div class="space-y-2">
+          <span class="inline-block px-3 py-1 bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-semibold rounded-full tracking-widest uppercase">
+            Step 2 of 2 • Secret Passcode 🤫
+          </span>
+          <h2 class="text-2xl font-black text-white font-heading">
+            Enter Our Secret Code
+          </h2>
+          <p class="text-xs text-rose-200/80">
+            Enter the 4-digit secret key known only to our hearts.
+          </p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <div class="flex justify-center gap-3">
+            <input type="password" maxlength="1" class="pin-input w-12 h-14 text-center text-2xl font-bold bg-black/60 border-2 border-rose-500/50 rounded-xl text-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-500 focus:outline-none" autofocus oninput="handlePin(this, 0)" onkeydown="handlePinBack(event, 0)" />
+            <input type="password" maxlength="1" class="pin-input w-12 h-14 text-center text-2xl font-bold bg-black/60 border-2 border-rose-500/50 rounded-xl text-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-500 focus:outline-none" oninput="handlePin(this, 1)" onkeydown="handlePinBack(event, 1)" />
+            <input type="password" maxlength="1" class="pin-input w-12 h-14 text-center text-2xl font-bold bg-black/60 border-2 border-rose-500/50 rounded-xl text-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-500 focus:outline-none" oninput="handlePin(this, 2)" onkeydown="handlePinBack(event, 2)" />
+            <input type="password" maxlength="1" class="pin-input w-12 h-14 text-center text-2xl font-bold bg-black/60 border-2 border-rose-500/50 rounded-xl text-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-500 focus:outline-none" oninput="handlePin(this, 3)" onkeydown="handlePinBack(event, 3)" />
+          </div>
+
+          <div id="codeErrorMsg" class="hidden text-xs text-rose-400 font-semibold p-2 bg-rose-950/60 border border-rose-500/30 rounded-lg"></div>
+
+          <button 
+            onclick="validateCodeStep()" 
+            class="w-full py-3.5 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-500 text-white font-extrabold rounded-xl shadow-lg shadow-rose-600/40 hover:shadow-rose-500/60 transition-all transform active:scale-95 flex items-center justify-center space-x-2"
+          >
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Unlock Our Magic ✨</span>
+          </button>
+
+          <button onclick="backToEmailStep()" class="text-xs text-rose-300/70 hover:text-rose-200 underline pt-1">
+            Change email address
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- 2. TOP FLOATING NAVBAR / CONTROLS         -->
+  <!-- ========================================== -->
+  <header class="w-full max-w-5xl px-4 py-3 flex items-center justify-between z-40 relative">
+    <!-- Brand / Title -->
+    <div class="flex items-center space-x-2.5">
+      <div class="w-9 h-9 rounded-full bg-rose-600/30 border border-rose-500/50 flex items-center justify-center shadow-md shadow-rose-900/50">
+        <i data-lucide="heart" class="w-5 h-5 text-rose-400 fill-rose-500"></i>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold text-white tracking-wide font-heading">Leena & Jeeva</h2>
+        <p class="text-[10px] text-rose-300/70 font-medium">Forever Begins With Us ❤️</p>
+      </div>
+    </div>
+
+    <!-- Right Controls: Music Player & Admin (Jeeva only) -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      
+      <!-- Audio Toggle Button -->
+      <button 
+        id="musicToggleBtn"
+        onclick="toggleMusic()" 
+        title="Play / Pause Song"
+        class="flex items-center space-x-2 px-3 py-1.5 bg-rose-950/60 hover:bg-rose-900/70 border border-rose-500/40 rounded-full text-xs font-semibold text-rose-200 transition shadow"
+      >
+        <i id="musicIcon" data-lucide="disc" class="w-4 h-4 text-rose-400 animate-spin-slow"></i>
+        <span id="musicStatusText" class="hidden sm:inline">Playing ❤️</span>
+      </button>
+
+      <!-- Jeeva's Admin Control Button (Only visible for jeevasambath07@gmail.com) -->
+      <button 
+        id="adminControlsBtn" 
+        onclick="openAdminModal()" 
+        class="hidden px-3 py-1.5 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 rounded-full text-xs font-bold text-amber-300 transition flex items-center space-x-1.5 shadow"
+      >
+        <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+        <span>Manage Photos (Admin)</span>
+      </button>
+
+      <!-- Lock Screen Button -->
+      <button 
+        onclick="lockApp()" 
+        title="Lock Website"
+        class="p-2 bg-rose-950/50 hover:bg-rose-900/60 border border-rose-500/30 rounded-full text-rose-300/80 transition"
+      >
+        <i data-lucide="lock" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ========================================== -->
+  <!-- 3. MAIN STORY STAGES CONTAINER             -->
+  <!-- ========================================== -->
+  <main class="w-full max-w-4xl px-4 py-3 flex-1 flex flex-col justify-center items-center z-30 relative min-h-[620px]">
+    
+    <!-- ------------------------------------------------------------------ -->
+    <!-- STAGE 1: HOMEPAGE (OUR STORY BEGINS & MAIN HERO PHOTO)             -->
+    <!-- ------------------------------------------------------------------ -->
+    <section id="stage1" class="stage-section w-full transition-all duration-700 ease-out">
+      <div class="romantic-glass p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+        
+        <!-- Background Ambient Glow -->
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Left: Hero Photo #1 (Polaroid Frame) -->
+        <div class="w-full md:w-5/12 flex flex-col items-center">
+          <div class="polaroid-card w-64 sm:w-72 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+            <div class="w-full h-64 sm:h-72 bg-rose-950/40 rounded overflow-hidden relative border border-rose-100/20 flex items-center justify-center">
+              <img 
+                id="photoDisplay1" 
+                src="" 
+                alt="Our Hero Moment" 
+                class="w-full h-full object-cover"
+              />
+              <div id="photoPlaceholder1" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-rose-950/80 to-black/80">
+                <i data-lucide="image" class="w-10 h-10 text-rose-400/80 mb-2"></i>
+                <p class="text-xs text-rose-200 font-medium">Hero Photo #1</p>
+                <p class="text-[10px] text-rose-300/60 mt-1">Admin can upload via top button</p>
+              </div>
+            </div>
+            <div class="pt-3 text-center">
+              <p class="font-polaroid text-xl text-rose-950 font-bold leading-tight">You & Me • Forever ❤️</p>
+              <p class="text-[10px] text-rose-900/60 font-semibold uppercase tracking-wider">November 10, 2007</p>
+            </div>
+          </div>
+
+          <!-- Magic Life Days Counter -->
+          <div class="mt-4 px-4 py-2 bg-rose-950/70 border border-rose-500/30 rounded-2xl text-center shadow">
+            <p class="text-[11px] text-rose-300/80 uppercase tracking-wider font-semibold">Universe Blessed With You For</p>
+            <p id="lifeCounter" class="text-base sm:text-lg font-extrabold text-gold font-heading tracking-wide">Calculating...</p>
+          </div>
+        </div>
+
+        <!-- Right: Homepage Quote & Greeting -->
+        <div class="w-full md:w-7/12 space-y-5 text-center md:text-left">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1 bg-rose-950/80 border border-rose-500/40 rounded-full text-xs font-bold text-rose-300 uppercase tracking-wider">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-400"></i>
+            <span>Our Most Beautiful Chapter</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-white font-heading leading-tight">
+            Happy Birthday, My Leena! ✨
+          </h1>
+
+          <!-- Main Homepage Quote -->
+          <div class="p-5 bg-black/40 border-l-4 border-rose-500 rounded-r-2xl shadow-inner relative">
+            <i data-lucide="quote" class="absolute right-4 top-4 w-8 h-8 text-rose-500/10 pointer-events-none"></i>
+            <p class="text-sm sm:text-base text-rose-100 font-serif italic leading-relaxed">
+              "Happy Birthday to the girl I want beside me in every new beginning. ❤️ Maybe we started our lives as two different journeys, but from now on, I want us to write one story together. Through every smile, every struggle, every dream and every unexpected turn, let's choose each other. No more 'you' and 'me'… it's time for 'US'. Let's start our most beautiful chapter together. I love you! 🫂❤️"
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-col sm:flex-row gap-3 items-center justify-center md:justify-start">
+            <button 
+              onclick="goToStage(2)" 
+              class="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold rounded-xl shadow-lg shadow-rose-600/40 transition-all transform active:scale-95 flex items-center justify-center space-x-2"
+            >
+              <span>Explore The Night You Were Born</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- STAGE 2: THE COSMIC NIGHT (NASA STARSCAPE & INTERACTIVE STAR MAP)  -->
+    <!-- ------------------------------------------------------------------ -->
+    <section id="stage2" class="stage-section hidden w-full transition-all duration-700 ease-out">
+      <div class="romantic-glass p-5 sm:p-8 text-center space-y-5 relative overflow-hidden">
+        
+        <!-- Deep Space Cosmic Background Overlay -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none rounded-[1.75rem]">
+          <div class="absolute inset-0 bg-gradient-to-b from-purple-950/70 via-rose-950/50 to-black/80 z-10 backdrop-blur-[1px]"></div>
+          <img 
+            src="https://images-assets.nasa.gov/image/PIA25433/PIA25433~medium.jpg" 
+            alt="NASA Space" 
+            loading="lazy" 
+            class="w-full h-full object-cover opacity-25 scale-105 animate-pulse-glow"
+          >
+        </div>
+
+        <!-- Header Badge & Title -->
+        <div class="space-y-1.5 z-10 relative">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1 bg-white/95 text-rose-600 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-500 animate-spin-slow"></i>
+            <span>10 • 11 • 2007 Starscape</span>
+          </div>
+          
+          <h2 class="text-2xl sm:text-4xl font-black text-white font-heading leading-tight pt-1">
+            The Night You Were Born ✨
+          </h2>
+          
+          <p class="text-xs sm:text-sm text-rose-200/90 font-medium max-w-md mx-auto">
+            On 10 • 11 • 2007, the universe quietly placed its brightest star: <strong class="text-rose-400 font-bold underline decoration-rose-500/50">Leena</strong>.
+          </p>
+        </div>
+
+        <!-- NASA Space Postcards (Polaroid Style with Washi Tape) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-1 z-10 relative">
+          
+          <!-- Postcard 1: Carina Nebula -->
+          <div class="polaroid-card p-3 bg-white/95 text-left space-y-2 relative border-2 border-white shadow-xl">
+            <div class="washi-tape"></div>
+            <div class="w-full h-28 sm:h-32 rounded-xl overflow-hidden relative shadow-inner">
+              <img 
+                src="https://images-assets.nasa.gov/image/PIA25433/PIA25433~medium.jpg" 
+                alt="Carina Nebula" 
+                loading="lazy" 
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute bottom-1 right-1.5 bg-black/70 backdrop-blur-md text-[9px] text-white px-2 py-0.5 rounded-full font-bold">Webb NIRCam</span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-rose-950 font-semibold leading-tight font-serif">
+              "The Carina Nebula — a place where baby stars are born. Just like you. 🌟"
+            </p>
+          </div>
+
+          <!-- Postcard 2: Pillars of Creation -->
+          <div class="polaroid-card p-3 bg-white/95 text-left space-y-2 relative border-2 border-white shadow-xl">
+            <div class="washi-tape"></div>
+            <div class="w-full h-28 sm:h-32 rounded-xl overflow-hidden relative shadow-inner">
+              <img 
+                src="https://images-assets.nasa.gov/image/PIA25585/PIA25585~medium.jpg" 
+                alt="Pillars of Creation" 
+                loading="lazy" 
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute bottom-1 right-1.5 bg-black/70 backdrop-blur-md text-[9px] text-white px-2 py-0.5 rounded-full font-bold">Webb / Hubble</span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-rose-950 font-semibold leading-tight font-serif">
+              "The Pillars of Creation — even the universe builds beautiful things slowly."
+            </p>
+          </div>
+
+          <!-- Postcard 3: Hubble Deep Field -->
+          <div class="polaroid-card p-3 bg-white/95 text-left space-y-2 relative border-2 border-white shadow-xl">
+            <div class="washi-tape"></div>
+            <div class="w-full h-28 sm:h-32 rounded-xl overflow-hidden relative shadow-inner">
+              <img 
+                src="https://images-assets.nasa.gov/image/PIA12348/PIA12348~medium.jpg" 
+                alt="Hubble Deep Field" 
+                loading="lazy" 
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute bottom-1 right-1.5 bg-black/70 backdrop-blur-md text-[9px] text-white px-2 py-0.5 rounded-full font-bold">Hubble Legacy</span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-rose-950 font-semibold leading-tight font-serif">
+              "The Hubble Deep Field — thousands of galaxies, and you still shine brightest."
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Interactive Constellation Canvas & Wish Display Area -->
+        <div class="p-4 sm:p-5 max-w-lg mx-auto space-y-3 z-10 relative bg-white/95 rounded-2xl border-2 border-white text-rose-950 shadow-xl">
+          <div class="flex items-center justify-between text-xs font-bold text-rose-900 border-b border-rose-200 pb-2">
+            <span class="flex items-center space-x-1">
+              <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-400"></i>
+              <span>Interactive Star Map</span>
+            </span>
+            <span id="starTapInstruction" class="text-rose-600 animate-pulse font-semibold">Tap the glowing center star ✨</span>
+          </div>
+
+          <!-- Star Map Container with SVG Constellation -->
+          <div class="relative w-full h-44 sm:h-48 bg-slate-950 rounded-2xl overflow-hidden border border-rose-300/40 shadow-inner flex items-center justify-center">
+            
+            <!-- SVG Constellation Lines (Draws heart) -->
+            <svg id="constellationSvg" class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 180">
+              <path 
+                id="heartPath" 
+                d="M150 70 C130 40, 90 60, 110 95 L150 140 L190 95 C210 60, 170 40, 150 70 Z" 
+                fill="none" 
+                stroke="rgba(244, 63, 94, 0.9)" 
+                stroke-width="3" 
+                stroke-dasharray="400" 
+                stroke-dashoffset="400" 
+                class="transition-all duration-1000" 
+              />
+            </svg>
+
+            <!-- Tappable Surrounding Stars -->
+            <div id="starsContainer" class="absolute inset-0"></div>
+
+            <!-- Center Bright "Leena's Star" -->
+            <button 
+              id="herStarBtn" 
+              onclick="triggerHerStar()" 
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-amber-400 flex items-center justify-center shadow-lg shadow-rose-500/60 hover:scale-125 active:scale-95 transition-all duration-300 animate-pulse touch-manipulation z-20"
+              title="Click Leena's Star"
+            >
+              <i data-lucide="star" class="w-6 h-6 text-white fill-white"></i>
+            </button>
+          </div>
+
+          <!-- Dynamic Wish / Fun Fact Display -->
+          <div id="starWishTextDisplay" class="text-xs sm:text-sm font-medium text-rose-950 min-h-[36px] flex items-center justify-center text-center px-2 py-1 bg-rose-50 rounded-xl border border-rose-200">
+            "The light from these stars traveled thousands of years to be here with you today."
+          </div>
+        </div>
+
+        <!-- Continue Button (Revealed when Her Star is tapped or initially accessible) -->
+        <div id="constellationContinueContainer" class="flex justify-center gap-3 pt-1 z-10 relative">
+          <button onclick="goToStage(1)" class="px-5 py-2.5 bg-rose-950/60 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 rounded-xl text-xs font-bold transition">
+            Back
+          </button>
+          <button onclick="goToStage(3)" class="px-7 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-rose-600/40 transition flex items-center space-x-2">
+            <span>Next: Make A Wish 🎂</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- NASA Public Domain Credit Line -->
+        <p class="text-[10px] sm:text-xs text-rose-300/60 font-semibold z-10 relative pt-1">
+          ✨ Real imagery: NASA / ESA / CSA — Hubble & James Webb (public domain)
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- STAGE 3: MAKE A WISH (CAKE & CANDLES - PAGE 3 AS REQUESTED)        -->
+    <!-- ------------------------------------------------------------------ -->
+    <section id="stage3" class="stage-section hidden w-full transition-all duration-700 ease-out">
+      <div class="romantic-glass p-6 sm:p-10 space-y-6 text-center relative overflow-hidden">
+        
+        <div class="space-y-1">
+          <span class="inline-block px-3 py-1 bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-bold rounded-full uppercase tracking-wider">
+            Make A Birthday Wish • Stage 3
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-heading">
+            Every Dream & Every Tomorrow 🎂
+          </h2>
+          <p class="text-xs text-rose-200/70">Click the glowing candles to make a wish and blow them out!</p>
+        </div>
+
+        <!-- Quote 3 -->
+        <div class="max-w-2xl mx-auto p-5 bg-black/40 border-l-4 border-rose-500 rounded-r-2xl shadow-inner text-left relative">
+          <p class="text-sm sm:text-base text-rose-100 font-serif italic leading-relaxed">
+            "I don't just wish to be in your birthday memories; I wish to be in every birthday, every dream and every tomorrow of your life." ❤️
+          </p>
+        </div>
+
+        <!-- Interactive 3D Birthday Cake Pedestal -->
+        <div class="py-4 flex flex-col items-center justify-center">
+          
+          <div class="relative w-64 h-56 flex flex-col items-center justify-end select-none">
+            
+            <!-- Candles (3 candles) -->
+            <div id="candleGroup" class="flex gap-8 mb-2 z-20 cursor-pointer" onclick="blowCandles()" title="Click to blow out candles!">
+              <!-- Candle 1 -->
+              <div class="flex flex-col items-center">
+                <div id="flame1" class="flame w-3.5 h-7"></div>
+                <div class="w-2.5 h-10 bg-gradient-to-b from-rose-300 to-rose-400 rounded-sm shadow"></div>
+              </div>
+              <!-- Candle 2 (Middle) -->
+              <div class="flex flex-col items-center -mt-2">
+                <div id="flame2" class="flame w-4 h-8"></div>
+                <div class="w-3 h-12 bg-gradient-to-b from-amber-200 to-amber-300 rounded-sm shadow"></div>
+              </div>
+              <!-- Candle 3 -->
+              <div class="flex flex-col items-center">
+                <div id="flame3" class="flame w-3.5 h-7"></div>
+                <div class="w-2.5 h-10 bg-gradient-to-b from-rose-300 to-rose-400 rounded-sm shadow"></div>
+              </div>
+            </div>
+
+            <!-- Cake Tier 1 (Top) -->
+            <div class="w-40 h-14 bg-gradient-to-r from-rose-800 via-pink-700 to-rose-800 rounded-2xl border-2 border-rose-300/40 shadow-lg relative flex items-center justify-center z-10">
+              <span class="text-xs font-script text-white tracking-widest text-lg drop-shadow">Happy Birthday Leena</span>
+              <!-- Icing drops -->
+              <div class="absolute -bottom-2 inset-x-3 flex justify-between">
+                <div class="w-3 h-3 rounded-full bg-rose-300/60"></div>
+                <div class="w-4 h-4 rounded-full bg-rose-200/60"></div>
+                <div class="w-3 h-3 rounded-full bg-rose-300/60"></div>
+              </div>
+            </div>
+
+            <!-- Cake Tier 2 (Bottom Base) -->
+            <div class="w-56 h-16 -mt-3 bg-gradient-to-r from-rose-950 via-rose-900 to-rose-950 rounded-3xl border-2 border-rose-400/40 shadow-2xl flex items-center justify-center">
+              <span class="text-xs font-bold text-rose-200 tracking-wider">10 • 11 • 2007 ✨</span>
+            </div>
+
+            <!-- Pedestal Plate -->
+            <div class="w-64 h-4 -mt-1 bg-white/20 rounded-full blur-xs border border-white/30"></div>
+          </div>
+
+          <!-- Blow Candle Button -->
+          <button 
+            id="blowCandleBtn" 
+            onclick="blowCandles()" 
+            class="mt-3 px-5 py-2 bg-rose-950/80 hover:bg-rose-900 border border-rose-400/40 text-rose-200 rounded-full text-xs font-bold transition flex items-center space-x-2"
+          >
+            <i data-lucide="wind" class="w-4 h-4 text-rose-300"></i>
+            <span>Blow Out The Candles 💨</span>
+          </button>
+        </div>
+
+        <div class="flex gap-3 justify-center pt-2">
+          <button onclick="goToStage(2)" class="px-5 py-2.5 bg-rose-950/60 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 rounded-xl text-xs font-bold transition flex items-center space-x-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Back</span>
+          </button>
+          <button onclick="goToStage(4)" class="px-6 py-2.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 text-white rounded-xl text-xs font-bold shadow-md shadow-rose-600/30 transition flex items-center space-x-1.5">
+            <span>Next: Our Memories 📸</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- STAGE 4: OUR JOURNEY & MEMORIES (PHOTOS 3 & 4 + QUOTES 1 & 2)      -->
+    <!-- ------------------------------------------------------------------ -->
+    <section id="stage4" class="stage-section hidden w-full transition-all duration-700 ease-out">
+      <div class="romantic-glass p-6 sm:p-10 space-y-6 text-center relative overflow-hidden">
+        
+        <div class="space-y-1">
+          <span class="inline-block px-3 py-1 bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-bold rounded-full uppercase tracking-wider">
+            Our Tomorrow Together
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-heading">
+            Not Just You Or Me... It's OUR Journey 🫂
+          </h2>
+        </div>
+
+        <!-- Quotes Container -->
+        <div class="space-y-3 max-w-2xl mx-auto text-left">
+          <div class="p-4 bg-black/40 border-l-4 border-rose-500 rounded-r-2xl shadow-inner relative">
+            <p class="text-xs sm:text-sm text-rose-100 font-serif italic leading-relaxed">
+              "A new age, a new chapter, and hopefully a thousand new memories together. From now on, let's not just walk beside each other, let's build a whole new world together. You, me and our forever. ❤️"
+            </p>
+          </div>
+          <div class="p-4 bg-black/40 border-l-4 border-pink-500 rounded-r-2xl shadow-inner relative">
+            <p class="text-xs sm:text-sm text-rose-100 font-serif italic leading-relaxed">
+              "From today, I don't just want to be a part of your happiness; I want to be a part of your every tomorrow. Whatever life has planned for us, let's face it together. It's no longer your journey or mine… it's OUR journey. ❤️"
+            </p>
+          </div>
+        </div>
+
+        <!-- Flippable Polaroid Photo Cards (Photos #3 & #4) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto pt-2">
+          
+          <!-- Photo #3 Flip Card -->
+          <div class="flip-card h-72 cursor-pointer" onclick="flipCard(this)">
+            <div class="flip-inner h-full">
+              <!-- Front -->
+              <div class="flip-front polaroid-card flex flex-col justify-between">
+                <div class="w-full h-52 bg-rose-950/40 rounded overflow-hidden relative border border-rose-100/20">
+                  <img id="photoDisplay3" src="" alt="Memory 3" class="w-full h-full object-cover" />
+                  <div id="photoPlaceholder3" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-950/80 p-2">
+                    <i data-lucide="image" class="w-8 h-8 text-rose-400/60 mb-1"></i>
+                    <p class="text-xs text-rose-200">Memory Photo #3</p>
+                  </div>
+                </div>
+                <div class="pt-2 text-center">
+                  <p class="font-polaroid text-base text-rose-950 font-bold">Unconditional Smiles ❤️</p>
+                  <p class="text-[9px] text-rose-800 uppercase font-semibold">Tap to flip & read note ↺</p>
+                </div>
+              </div>
+              <!-- Back -->
+              <div class="flip-back p-6 bg-gradient-to-br from-rose-900 to-rose-950 border border-rose-400/40 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                <i data-lucide="heart" class="w-8 h-8 text-rose-300 fill-rose-400"></i>
+                <p class="font-serif italic text-sm text-rose-100">
+                  "Every smile of yours is a silent prayer answered. You make every breath worth living."
+                </p>
+                <span class="text-[10px] text-rose-300 font-bold uppercase tracking-wider">— Forever Yours, Jeeva</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Photo #4 Flip Card -->
+          <div class="flip-card h-72 cursor-pointer" onclick="flipCard(this)">
+            <div class="flip-inner h-full">
+              <!-- Front -->
+              <div class="flip-front polaroid-card flex flex-col justify-between">
+                <div class="w-full h-52 bg-rose-950/40 rounded overflow-hidden relative border border-rose-100/20">
+                  <img id="photoDisplay4" src="" alt="Memory 4" class="w-full h-full object-cover" />
+                  <div id="photoPlaceholder4" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-950/80 p-2">
+                    <i data-lucide="image" class="w-8 h-8 text-rose-400/60 mb-1"></i>
+                    <p class="text-xs text-rose-200">Memory Photo #4</p>
+                  </div>
+                </div>
+                <div class="pt-2 text-center">
+                  <p class="font-polaroid text-base text-rose-950 font-bold">Hand in Hand 🤝</p>
+                  <p class="text-[9px] text-rose-800 uppercase font-semibold">Tap to flip & read note ↺</p>
+                </div>
+              </div>
+              <!-- Back -->
+              <div class="flip-back p-6 bg-gradient-to-br from-rose-900 to-rose-950 border border-rose-400/40 rounded-xl flex flex-col items-center justify-center text-center space-y-2">
+                <i data-lucide="sparkles" class="w-8 h-8 text-amber-300"></i>
+                <p class="font-serif italic text-sm text-rose-100">
+                  "No matter which storm comes our way, my hand will always be holding yours tight."
+                </p>
+                <span class="text-[10px] text-rose-300 font-bold uppercase tracking-wider">— Jeevanantham</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex gap-3 justify-center pt-2">
+          <button onclick="goToStage(3)" class="px-5 py-2.5 bg-rose-950/60 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 rounded-xl text-xs font-bold transition flex items-center space-x-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Back</span>
+          </button>
+          <button onclick="goToStage(5)" class="px-7 py-3 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 text-white rounded-xl text-sm font-extrabold shadow-lg shadow-rose-600/40 transition flex items-center space-x-2">
+            <span>The Grand Surprise 👑</span>
+            <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ------------------------------------------------------------------ -->
+    <!-- STAGE 5: THE GRAND CLIMAX & FOREVER PROMISE (WITH PHOTO)           -->
+    <!-- ------------------------------------------------------------------ -->
+    <section id="stage5" class="stage-section hidden w-full transition-all duration-700 ease-out">
+      <div class="romantic-glass p-6 sm:p-10 space-y-7 text-center relative overflow-hidden border-2 border-rose-400/50 shadow-rose-950/80">
+        
+        <!-- Ambient Heart Pulse Glow -->
+        <div class="absolute inset-0 bg-gradient-to-b from-rose-600/10 via-transparent to-pink-600/10 pointer-events-none"></div>
+
+        <div class="space-y-3">
+          <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-rose-950/80 border border-rose-400/50 rounded-full text-xs font-extrabold text-rose-200 uppercase tracking-widest animate-pulse">
+            <i data-lucide="crown" class="w-4 h-4 text-gold"></i>
+            <span>The Grand Finale Wish</span>
+          </div>
+
+          <!-- The Exact Grand Climax Wish Requested By User -->
+          <div class="py-4 px-3 sm:px-6 bg-black/50 border-2 border-rose-500/50 rounded-3xl shadow-2xl relative">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-pink-200 to-amber-200 font-heading leading-tight tracking-tight drop-shadow-lg">
+              "once again happy bday my love dear super senior Mrs.Jeevanantham"
+            </h1>
+            <p class="text-sm sm:text-base text-rose-300 font-serif italic mt-3">
+              Forever and always, from your Jeeva ❤️
+            </p>
+          </div>
+        </div>
+
+        <!-- Climax Photo on the Last Page (Photo #5 / Forever Memory) -->
+        <div class="max-w-xs sm:max-w-sm mx-auto polaroid-card transform -rotate-1 hover:rotate-0 transition-transform">
+          <div class="w-full h-52 sm:h-60 bg-rose-950/40 rounded overflow-hidden relative border border-rose-100/20 flex items-center justify-center">
+            <img id="photoDisplay5" src="" alt="Our Climax Memory" class="w-full h-full object-cover" />
+            <div id="photoPlaceholder5" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-950/80 p-3">
+              <i data-lucide="heart" class="w-10 h-10 text-rose-400 mb-2 fill-rose-500/50"></i>
+              <p class="text-xs text-rose-200 font-bold">Our Forever Memory ❤️</p>
+              <p class="text-[10px] text-rose-300/60 mt-1">Special Climax Photo</p>
+            </div>
+          </div>
+          <div class="pt-3 text-center">
+            <p class="font-polaroid text-lg text-rose-950 font-bold leading-tight">Forever With You, My Love ❤️</p>
+            <p class="text-[10px] text-rose-800 font-semibold uppercase tracking-wider mt-0.5">Mrs. Jeevanantham</p>
+          </div>
+        </div>
+
+        <!-- Giant Beating Heart Visual -->
+        <div class="relative py-1 flex justify-center">
+          <div class="w-20 h-20 rounded-full bg-rose-950/80 border-2 border-rose-400 flex items-center justify-center shadow-[0_0_40px_#e11d48]">
+            <i data-lucide="heart" class="w-11 h-11 text-rose-500 fill-rose-500 animate-heartbeat"></i>
+          </div>
+        </div>
+
+        <!-- Romantic Letter Summary Card -->
+        <div class="max-w-xl mx-auto p-5 bg-black/40 border border-rose-500/30 rounded-2xl text-left space-y-2">
+          <div class="flex items-center justify-between border-b border-rose-500/30 pb-2">
+            <span class="text-xs font-bold text-rose-300 uppercase tracking-wider">A Sealed Promise 💌</span>
+            <span class="text-[10px] text-rose-400 font-semibold">November 10 • Forever</span>
+          </div>
+          <p class="text-xs sm:text-sm text-rose-100 font-serif leading-relaxed italic">
+            "Every step of my life was just leading me toward you. Today, on your birthday, I give you not just my love, but my entire heart, my every tomorrow, and a lifetime of happiness. Happy Birthday, my whole world."
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center pt-2">
+          <button onclick="goToStage(4)" class="px-5 py-3 bg-rose-950/70 hover:bg-rose-900 border border-rose-500/40 text-rose-200 rounded-xl text-xs font-bold transition flex items-center space-x-1.5">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Back to Memories</span>
+          </button>
+
+          <button onclick="triggerMassiveConfetti()" class="px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-rose-600/40 transition active:scale-95 flex items-center space-x-2">
+            <i data-lucide="party-popper" class="w-4 h-4"></i>
+            <span>Blast Confetti! 🎉</span>
+          </button>
+          
+          <button onclick="goToStage(1)" class="px-5 py-3 bg-rose-950/60 hover:bg-rose-900 border border-rose-500/30 text-rose-300 rounded-xl text-xs font-bold transition flex items-center space-x-2">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Relive From Beginning</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================== -->
+  <!-- 4. BOTTOM STAGE INDICATOR DOTS             -->
+  <!-- ========================================== -->
+  <footer class="w-full max-w-md py-4 px-4 flex flex-col items-center space-y-2 z-40 relative">
+    <div class="flex items-center space-x-3 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-rose-500/30 shadow-lg">
+      <button onclick="goToStage(1)" id="dot1" class="stage-dot w-3 h-3 rounded-full bg-rose-500 transition-all"></button>
+      <button onclick="goToStage(2)" id="dot2" class="stage-dot w-2 h-2 rounded-full bg-rose-900 transition-all"></button>
+      <button onclick="goToStage(3)" id="dot3" class="stage-dot w-2 h-2 rounded-full bg-rose-900 transition-all"></button>
+      <button onclick="goToStage(4)" id="dot4" class="stage-dot w-2 h-2 rounded-full bg-rose-900 transition-all"></button>
+      <button onclick="goToStage(5)" id="dot5" class="stage-dot w-2 h-2 rounded-full bg-rose-900 transition-all"></button>
+    </div>
+    <p class="text-[10px] text-rose-300/50 font-medium">Made with endless love by Jeeva ❤️</p>
+  </footer>
+
+
+  <!-- ========================================== -->
+  <!-- 5. ADMIN MODAL: PHOTO & SONG MANAGER       -->
+  <!--    (Accessible only for Jeeva's email)     -->
+  <!-- ========================================== -->
+  <div id="adminModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="romantic-glass max-w-lg w-full p-6 sm:p-8 space-y-5 border-2 border-amber-500/40 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-amber-500/30 pb-3">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
+          <h3 class="text-lg font-bold text-amber-200">Jeeva's Photo & Audio Manager</h3>
+        </div>
+        <button onclick="closeAdminModal()" class="text-rose-300/80 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-rose-200/80">
+        You are in Admin Mode (<span class="text-amber-300 font-bold">jeevasambath07@gmail.com</span>). Upload all 5 photos here from your phone or laptop. They will save permanently!
+      </p>
+
+      <!-- 5 Photo Upload Slots -->
+      <div class="space-y-4 pt-1">
+        
+        <!-- Slot 1: Hero Main Photo (Homepage) -->
+        <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-white">1. Hero Main Photo (Homepage)</span>
+            <span class="text-[10px] text-amber-300 font-semibold uppercase">Cover Highlight</span>
+          </div>
+          <input type="file" accept="image/*" onchange="handleAdminPhotoUpload(event, 1)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500" />
+        </div>
+
+        <!-- Slot 2: Cosmic Night Photo (Stage 2) -->
+        <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-white">2. Cosmic Night Photo (Stage 2)</span>
+            <span class="text-[10px] text-rose-400 font-semibold uppercase">Moon Phase Section</span>
+          </div>
+          <input type="file" accept="image/*" onchange="handleAdminPhotoUpload(event, 2)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500" />
+        </div>
+
+        <!-- Slot 3: Memory Photo #3 (Stage 3) -->
+        <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-white">3. Memory Photo #3 (Stage 3)</span>
+            <span class="text-[10px] text-rose-400 font-semibold uppercase">Polaroid Card 1</span>
+          </div>
+          <input type="file" accept="image/*" onchange="handleAdminPhotoUpload(event, 3)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500" />
+        </div>
+
+        <!-- Slot 4: Memory Photo #4 (Stage 3) -->
+        <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-white">4. Memory Photo #4 (Stage 3)</span>
+            <span class="text-[10px] text-rose-400 font-semibold uppercase">Polaroid Card 2</span>
+          </div>
+          <input type="file" accept="image/*" onchange="handleAdminPhotoUpload(event, 4)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500" />
+        </div>
+
+        <!-- Slot 5: Last Page Photo (Stage 5 Finale) -->
+        <div class="p-3 bg-black/40 border border-rose-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-white">5. Last Page Photo (Stage 5 Finale)</span>
+            <span class="text-[10px] text-amber-300 font-semibold uppercase">Grand Climax Page</span>
+          </div>
+          <input type="file" accept="image/*" onchange="handleAdminPhotoUpload(event, 5)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500" />
+        </div>
+
+        <!-- Audio Settings -->
+        <div class="p-3 bg-black/40 border border-amber-500/30 rounded-xl space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-amber-200">Song: Uyire Un Uyirena (Zero)</span>
+            <span class="text-[10px] text-amber-300 font-semibold uppercase">Romantic Audio</span>
+          </div>
+          <p class="text-[11px] text-rose-300/70">
+            You can upload your "Uyire Un Uyirena" MP3 audio file directly from your device here:
+          </p>
+          <input type="file" accept="audio/*" onchange="handleCustomAudioUpload(event)" class="text-xs text-rose-200 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-amber-600 file:text-white hover:file:bg-amber-500" />
+        </div>
+
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeAdminModal()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition">
+          Done & Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC & ENGINE                  -->
+  <!-- ========================================== -->
+  <script>
+    /* -------------------------------------------------------------
+       CONFIG & STATE
+       ------------------------------------------------------------- */
+    const ALLOWED_EMAILS = [
+      'leenaaneel10@gmail.com',
+      'jeevasambath07@gmail.com'
+    ];
+    const SECRET_CODE = '0710';
+    const SONG_START_TIME = 0; // Starts immediately since the user already downloaded audio trimmed from the 35th second!
+
+    let currentStage = 1;
+    let currentUserEmail = '';
+    let isMusicPlaying = false;
+    let candlesBlown = false;
+
+    // IndexedDB setup for storing high-res photos reliably without 5MB limits
+    let db;
+    const DB_NAME = 'ClientRomanceDB';
+    const DB_VERSION = 1;
+
+    function initDB() {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = (e) => {
+        db = e.target.result;
+        if (!db.objectStoreNames.contains('photos')) {
+          db.createObjectStore('photos');
+        }
+        if (!db.objectStoreNames.contains('audio')) {
+          db.createObjectStore('audio');
+        }
+      };
+      request.onsuccess = (e) => {
+        db = e.target.result;
+        loadSavedPhotos();
+        loadSavedAudio();
+      };
+      request.onerror = (e) => {
+        console.error('IndexedDB error', e);
+      };
+    }
+
+    /* -------------------------------------------------------------
+       AUTHENTICATION / GATEKEEPER
+       ------------------------------------------------------------- */
+    function checkPreviousSession() {
+      const savedEmail = localStorage.getItem('client_auth_email');
+      const savedUnlocked = localStorage.getItem('client_auth_unlocked');
+
+      if (savedEmail && savedUnlocked === 'true') {
+        currentUserEmail = savedEmail.toLowerCase().trim();
+        unlockApp(false); // unlock silently without repeating blast if refreshing
+      }
+    }
+
+    function validateEmailStep() {
+      const input = document.getElementById('inputEmail');
+      const errorDiv = document.getElementById('emailErrorMsg');
+      const enteredEmail = (input.value || '').trim().toLowerCase();
+
+      if (!enteredEmail) {
+        showError(errorDiv, 'Please enter your email address ❤️');
+        return;
+      }
+
+      if (ALLOWED_EMAILS.includes(enteredEmail)) {
+        currentUserEmail = enteredEmail;
+        errorDiv.classList.add('hidden');
+        // Transition to PIN / Secret Code step
+        document.getElementById('authStepEmail').classList.add('hidden');
+        document.getElementById('authStepCode').classList.remove('hidden');
+        lucide.createIcons();
+        const pinInputs = document.querySelectorAll('.pin-input');
+        if (pinInputs.length > 0) pinInputs[0].focus();
+      } else {
+        triggerShakeScreen();
+        showError(errorDiv, 'Invalid Email! This private world is strictly reserved 🔐✨');
+      }
+    }
+
+    function backToEmailStep() {
+      document.getElementById('authStepCode').classList.add('hidden');
+      document.getElementById('authStepEmail').classList.remove('hidden');
+      document.getElementById('codeErrorMsg').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function handlePin(elem, index) {
+      if (elem.value.length === 1 && index < 3) {
+        const next = document.querySelectorAll('.pin-input')[index + 1];
+        if (next) next.focus();
+      }
+      if (index === 3 && elem.value.length === 1) {
+        validateCodeStep();
+      }
+    }
+
+    function handlePinBack(e, index) {
+      if (e.key === 'Backspace' && !e.target.value && index > 0) {
+        const prev = document.querySelectorAll('.pin-input')[index - 1];
+        if (prev) {
+          prev.focus();
+          prev.value = '';
+        }
+      }
+    }
+
+    function validateCodeStep() {
+      const pinInputs = document.querySelectorAll('.pin-input');
+      let enteredCode = '';
+      pinInputs.forEach(input => enteredCode += input.value);
+      const errorDiv = document.getElementById('codeErrorMsg');
+
+      if (enteredCode === SECRET_CODE) {
+        errorDiv.classList.add('hidden');
+        localStorage.setItem('client_auth_email', currentUserEmail);
+        localStorage.setItem('client_auth_unlocked', 'true');
+        
+        // Grand Unlocking Blast!
+        unlockApp(true);
+      } else {
+        triggerShakeScreen();
+        showError(errorDiv, 'Wrong secret passcode! Hint: Our special anniversary digits 🤫');
+        pinInputs.forEach(input => input.value = '');
+        if (pinInputs[0]) pinInputs[0].focus();
+      }
+    }
+
+    function showError(element, message) {
+      element.textContent = message;
+      element.classList.remove('hidden');
+    }
+
+    function triggerShakeScreen() {
+      document.body.classList.add('shake-active');
+      setTimeout(() => {
+        document.body.classList.remove('shake-active');
+      }, 700);
+    }
+
+    /* -------------------------------------------------------------
+       GRAND UNLOCKING BLAST:
+       Screen Shake + Flying Balloons + Confetti Blast + Song from 35s
+       ------------------------------------------------------------- */
+    function unlockApp(isFullCelebration) {
+      const gatekeeper = document.getElementById('gatekeeperScreen');
+      
+      if (isFullCelebration) {
+        // 1. Screen Shake
+        triggerShakeScreen();
+
+        // 2. Confetti Explosion
+        triggerMassiveConfetti();
+
+        // 3. Flying Balloons
+        launchFlyingBalloons();
+
+        // 4. Play song immediately starting at 35 seconds!
+        playRomanticSong(SONG_START_TIME);
+      }
+
+      // Check if user is Jeeva (Admin)
+      if (currentUserEmail === 'jeevasambath07@gmail.com') {
+        const adminBtn = document.getElementById('adminControlsBtn');
+        if (adminBtn) adminBtn.classList.remove('hidden');
+      }
+
+      // Fade out gatekeeper screen
+      gatekeeper.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        gatekeeper.style.display = 'none';
+      }, 700);
+
+      lucide.createIcons();
+    }
+
+    function lockApp() {
+      localStorage.removeItem('client_auth_unlocked');
+      location.reload();
+    }
+
+    /* -------------------------------------------------------------
+       FLYING BALLOONS GENERATOR
+       ------------------------------------------------------------- */
+    function launchFlyingBalloons() {
+      const container = document.getElementById('balloonContainer');
+      const colors = ['#e11d48', '#fb7185', '#be123c', '#fda4af', '#f43f5e', '#ec4899'];
+      const balloonCount = 28;
+
+      for (let i = 0; i < balloonCount; i++) {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const leftPercent = Math.random() * 95;
+        const duration = 3.5 + Math.random() * 3.5;
+        const delay = Math.random() * 1.5;
+
+        balloon.style.backgroundColor = color;
+        balloon.style.left = leftPercent + '%';
+        balloon.style.animationDuration = duration + 's';
+        balloon.style.animationDelay = delay + 's';
+
+        container.appendChild(balloon);
+      }
+
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 8000);
+    }
+
+    /* -------------------------------------------------------------
+       CONFETTI EXPLOSION
+       ------------------------------------------------------------- */
+    function triggerMassiveConfetti() {
+      if (typeof confetti !== 'function') return;
+      
+      const count = 200;
+      const defaults = {
+        origin: { y: 0.7 },
+        colors: ['#e11d48', '#fb7185', '#fda4af', '#fbbf24', '#ffffff', '#be123c']
+      };
+
+      function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio)
+        }));
+      }
+
+      fire(0.25, { spread: 26, startVelocity: 55 });
+      fire(0.2, { spread: 60 });
+      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      fire(0.1, { spread: 120, startVelocity: 45 });
+    }
+
+    /* -------------------------------------------------------------
+       AUDIO PLAYER (UYIRE UN UYIRENA)
+       ------------------------------------------------------------- */
+    const audioEl = document.getElementById('romanticAudio');
+    let synthCtx = null;
+    let synthInterval = null;
+    let isSynthPlaying = false;
+
+    // Web Audio Synthesizer: Sweet romantic melody fallback (guarantees music plays even on file://)
+    function playRomanticSynth() {
+      if (isSynthPlaying) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!synthCtx) {
+          synthCtx = new AudioContext();
+        }
+        if (synthCtx.state === 'suspended') {
+          synthCtx.resume();
+        }
+
+        const melodyChords = [
+          [261.63, 329.63, 392.00], // C
+          [220.00, 261.63, 329.63], // Am
+          [174.61, 220.00, 261.63], // F
+          [196.00, 246.94, 293.66], // G
+        ];
+        let idx = 0;
+
+        function stepChord() {
+          if (!synthCtx || synthCtx.state !== 'running') return;
+          const notes = melodyChords[idx % melodyChords.length];
+          idx++;
+
+          notes.forEach((freq, i) => {
+            const osc = synthCtx.createOscillator();
+            const gain = synthCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, synthCtx.currentTime + i * 0.12);
+            gain.gain.setValueAtTime(0.0001, synthCtx.currentTime + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.08, synthCtx.currentTime + i * 0.12 + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, synthCtx.currentTime + i * 0.12 + 2.5);
+
+            osc.connect(gain);
+            gain.connect(synthCtx.destination);
+            osc.start(synthCtx.currentTime + i * 0.12);
+            osc.stop(synthCtx.currentTime + i * 0.12 + 2.6);
+          });
+        }
+
+        stepChord();
+        synthInterval = setInterval(stepChord, 3000);
+        isSynthPlaying = true;
+        isMusicPlaying = true;
+        updateMusicUI(true);
+      } catch (err) {
+        console.warn('Synth error:', err);
+      }
+    }
+
+    function stopRomanticSynth() {
+      if (synthInterval) clearInterval(synthInterval);
+      if (synthCtx && synthCtx.state === 'running') {
+        try { synthCtx.suspend(); } catch(e) {}
+      }
+      isSynthPlaying = false;
+    }
+
+    function playRomanticSong(startTime = 35) {
+      if (!audioEl) {
+        playRomanticSynth();
+        return;
+      }
+
+      const applySeek = () => {
+        try {
+          if (audioEl.duration && !isNaN(audioEl.duration) && audioEl.duration > startTime) {
+            audioEl.currentTime = startTime;
+          }
+        } catch(e) {}
+      };
+
+      if (audioEl.readyState >= 1) {
+        applySeek();
+      } else {
+        audioEl.addEventListener('loadedmetadata', applySeek, { once: true });
+      }
+
+      const playPromise = audioEl.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isMusicPlaying = true;
+          stopRomanticSynth();
+          updateMusicUI(true);
+        }).catch(err => {
+          console.warn('HTML5 Audio play blocked or unavailable, using romantic synth fallback:', err);
+          playRomanticSynth();
+        });
+      } else {
+        playRomanticSynth();
+      }
+    }
+
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        if (audioEl && !audioEl.paused) {
+          audioEl.pause();
+        }
+        stopRomanticSynth();
+        isMusicPlaying = false;
+        updateMusicUI(false);
+      } else {
+        playRomanticSong(SONG_START_TIME);
+      }
+    }
+
+    function updateMusicUI(playing) {
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicStatusText');
+      if (playing) {
+        icon.classList.add('animate-spin-slow');
+        if (text) text.textContent = 'Our Song ❤️';
+      } else {
+        icon.classList.remove('animate-spin-slow');
+        if (text) text.textContent = 'Paused ⏸️';
+      }
+    }
+
+    /* -------------------------------------------------------------
+       STAGE NAVIGATION
+       ------------------------------------------------------------- */
+    function goToStage(stageNum) {
+      currentStage = stageNum;
+      
+      // Hide all stages
+      document.querySelectorAll('.stage-section').forEach(el => {
+        el.classList.add('hidden');
+      });
+
+      // Show selected stage
+      const target = document.getElementById(`stage${stageNum}`);
+      if (target) {
+        target.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update dot indicators
+      for (let i = 1; i <= 5; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        if (dot) {
+          if (i === stageNum) {
+            dot.className = 'stage-dot w-4 h-2.5 rounded-full bg-rose-500 transition-all';
+          } else {
+            dot.className = 'stage-dot w-2 h-2 rounded-full bg-rose-900/80 transition-all';
+          }
+        }
+      }
+
+      if (stageNum === 2) {
+        renderStarMap();
+      }
+      if (stageNum === 5) {
+        triggerMassiveConfetti();
+      }
+
+      lucide.createIcons();
+    }
+
+    function flipCard(cardEl) {
+      const inner = cardEl.querySelector('.flip-inner');
+      if (inner) {
+        inner.classList.toggle('is-flipped');
+      }
+    }
+
+    function blowCandles() {
+      if (candlesBlown) return;
+      candlesBlown = true;
+      
+      const f1 = document.getElementById('flame1');
+      const f2 = document.getElementById('flame2');
+      const f3 = document.getElementById('flame3');
+      const btn = document.getElementById('blowCandleBtn');
+
+      [f1, f2, f3].forEach(f => {
+        if (f) {
+          f.style.opacity = '0';
+          f.style.transform = 'scale(0.2)';
+          f.style.transition = 'all 0.4s ease-out';
+        }
+      });
+
+      if (btn) {
+        btn.innerHTML = '<span>Candles Blown! Wish Sent To The Stars ✨</span>';
+        btn.classList.add('bg-rose-900', 'text-amber-200');
+      }
+
+      triggerMassiveConfetti();
+    }
+
+    /* -------------------------------------------------------------
+       "DAYS OF YOUR MAGIC" COUNTER (Since Nov 10, 2007)
+       ------------------------------------------------------------- */
+    function updateLifeCounter() {
+      const birthDate = new Date('2007-11-10T00:00:00+05:30');
+      const now = new Date();
+      const diffMs = now - birthDate;
+
+      if (diffMs > 0) {
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diffMs / (1000 * 60)) % 60);
+        const secs = Math.floor((diffMs / 1000) % 60);
+
+        const counterEl = document.getElementById('lifeCounter');
+        if (counterEl) {
+          counterEl.textContent = `${days.toLocaleString()} Days, ${hours}h ${mins}m ${secs}s ✨`;
+        }
+      }
+    }
+    setInterval(updateLifeCounter, 1000);
+    updateLifeCounter();
+
+    /* -------------------------------------------------------------
+       CANVAS: FALLING ROSE PETALS
+       ------------------------------------------------------------- */
+    const petalCanvas = document.getElementById('petalsCanvas');
+    const ctx = petalCanvas.getContext('2d');
+    let petals = [];
+
+    function resizePetalsCanvas() {
+      petalCanvas.width = window.innerWidth;
+      petalCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizePetalsCanvas);
+    resizePetalsCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * petalCanvas.width;
+        this.y = -20;
+        this.size = 10 + Math.random() * 12;
+        this.speedY = 0.8 + Math.random() * 1.6;
+        this.speedX = Math.sin(Math.random() * 6) * 1.2;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+        this.opacity = 0.4 + Math.random() * 0.4;
+        this.color = Math.random() > 0.3 ? '#e11d48' : '#fb7185';
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.02) * 0.8 + this.speedX * 0.2;
+        this.rotation += this.rotationSpeed;
+        if (this.y > petalCanvas.height + 20) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, this.size / 3, 0, this.size);
+        ctx.bezierCurveTo(this.size, this.size / 3, this.size / 2, -this.size / 2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 30; i++) {
+      petals.push(new Petal());
+    }
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, petalCanvas.width, petalCanvas.height);
+      petals.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    /* -------------------------------------------------------------
+       INTERACTIVE CONSTELLATION & STAR MAP (STAGE 2)
+       ------------------------------------------------------------- */
+    let herStarActivated = false;
+
+    function renderStarMap() {
+      const container = document.getElementById("starsContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const starPositions = [
+        { top: "20%", left: "15%" },
+        { top: "25%", left: "80%" },
+        { top: "75%", left: "20%" },
+        { top: "70%", left: "75%" },
+        { top: "40%", left: "30%" },
+        { top: "40%", left: "70%" },
+        { top: "15%", left: "50%" },
+      ];
+
+      starPositions.forEach((pos, idx) => {
+        const starBtn = document.createElement("button");
+        starBtn.className = "absolute w-8 h-8 rounded-full flex items-center justify-center text-amber-300 hover:scale-125 active:scale-95 transition-transform touch-manipulation z-10";
+        starBtn.style.top = pos.top;
+        starBtn.style.left = pos.left;
+        starBtn.innerHTML = `<i data-lucide="star" class="w-4 h-4 fill-current drop-shadow"></i>`;
+        starBtn.onclick = () => handleStarTap(idx, starBtn);
+        container.appendChild(starBtn);
+      });
+
+      lucide.createIcons();
+    }
+
+    const starFacts = [
+      "✨ A star was born on Nov 10, 2007 to brighten my entire universe.",
+      "🌟 Every galaxy pales in comparison to your smile.",
+      "💫 You are the wish I made on every falling star.",
+      "✨ 6,000+ days of your radiant starlight in this world.",
+      "💖 The universe knew what it was doing when it created you.",
+      "🌌 Thousands of lightyears away, nothing shines like Leena.",
+      "🌠 You turned my ordinary life into pure stardust."
+    ];
+
+    function handleStarTap(index, btn) {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 15,
+          spread: 40,
+          origin: { y: 0.6 },
+          colors: ['#fbbf24', '#f43f5e', '#fda4af']
+        });
+      }
+      btn.classList.add('scale-150', 'text-white');
+      setTimeout(() => btn.classList.remove('scale-150', 'text-white'), 300);
+
+      const display = document.getElementById("starWishTextDisplay");
+      if (display) {
+        display.innerText = starFacts[index % starFacts.length];
+      }
+    }
+
+    function triggerHerStar() {
+      if (herStarActivated) {
+        goToStage(3);
+        return;
+      }
+
+      herStarActivated = true;
+      triggerMassiveConfetti();
+
+      const display = document.getElementById("starWishTextDisplay");
+      if (display) {
+        display.innerText = "✨ Leena's Star Shines Brightest! Constellation Complete! ❤️ ✨";
+        display.className = "text-xs sm:text-sm font-bold text-rose-600 min-h-[36px] flex items-center justify-center text-center px-2 py-1 bg-rose-50 rounded-xl border border-rose-300 animate-bounce";
+      }
+
+      const instruction = document.getElementById("starTapInstruction");
+      if (instruction) {
+        instruction.innerText = "Constellation Completed! ❤️";
+      }
+
+      const heartPath = document.getElementById("heartPath");
+      if (heartPath) {
+        heartPath.style.strokeDashoffset = "0";
+      }
+
+      const continueBtn = document.getElementById("constellationContinueContainer");
+      if (continueBtn) {
+        continueBtn.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /* -------------------------------------------------------------
+       PHOTO MANAGEMENT & INDEXEDDB ENGINE
+       ------------------------------------------------------------- */
+    function openAdminModal() {
+      document.getElementById('adminModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function handleAdminPhotoUpload(event, photoSlotNumber) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Data = e.target.result;
+        savePhotoToDB(photoSlotNumber, base64Data);
+        displayPhotoInDOM(photoSlotNumber, base64Data);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function savePhotoToDB(slot, data) {
+      if (!db) return;
+      const tx = db.transaction('photos', 'readwrite');
+      const store = tx.objectStore('photos');
+      store.put(data, `photo_${slot}`);
+    }
+
+    function loadSavedPhotos() {
+      if (!db) return;
+      const tx = db.transaction('photos', 'readonly');
+      const store = tx.objectStore('photos');
+
+      for (let slot = 1; slot <= 5; slot++) {
+        const request = store.get(`photo_${slot}`);
+        request.onsuccess = (e) => {
+          if (e.target.result) {
+            displayPhotoInDOM(slot, e.target.result);
+          }
+        };
+      }
+    }
+
+    function displayPhotoInDOM(slot, base64Url) {
+      const img = document.getElementById(`photoDisplay${slot}`);
+      const placeholder = document.getElementById(`photoPlaceholder${slot}`);
+      if (img && base64Url) {
+        img.src = base64Url;
+        img.classList.remove('hidden');
+        if (placeholder) placeholder.classList.add('hidden');
+      }
+    }
+
+    function handleCustomAudioUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const audioData = e.target.result;
+        if (db) {
+          const tx = db.transaction('audio', 'readwrite');
+          const store = tx.objectStore('audio');
+          store.put(audioData, 'custom_song');
+        }
+        audioEl.src = audioData;
+        audioEl.currentTime = SONG_START_TIME;
+        alert('Uyire Un Uyirena audio successfully saved! It will play when unlocked ❤️');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadSavedAudio() {
+      if (!db) return;
+      const tx = db.transaction('audio', 'readonly');
+      const store = tx.objectStore('audio');
+      const req = store.get('custom_song');
+      req.onsuccess = (e) => {
+        if (e.target.result) {
+          audioEl.src = e.target.result;
+        }
+      };
+    }
+
+    /* -------------------------------------------------------------
+       INITIALIZATION
+       ------------------------------------------------------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initDB();
+      renderStarMap();
+      checkPreviousSession();
+    });
+  </script>
+</body>
+</html>
